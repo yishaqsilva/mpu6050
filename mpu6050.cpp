@@ -20,7 +20,7 @@ __u8 mpu6050::read_byte(__u8 payload) {
 
     struct i2c_msg msgs[2] = {
         {.addr = ADDR, .flags = 0, .len = 1, .buf = &payload},
-        {.addr = ADDR, .flags = 0, .len = 1, .buf = &response}
+        {.addr = ADDR, .flags = I2C_M_RD, .len = 1, .buf = &response }
     };
 
     struct i2c_rdwr_ioctl_data data = {
