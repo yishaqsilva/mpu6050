@@ -14,12 +14,12 @@ mpu6050::mpu6050(int n) {
     ioctl(fd, I2C_SLAVE, ADDR);
 }
 
-__u8 mpu6050::read_byte(__u8 payload) {
+__u8 mpu6050::read_byte(__u8 reg) {
 
     __u8 response;
 
     struct i2c_msg msgs[2] = {
-        {.addr = ADDR, .flags = 0, .len = 1, .buf = &payload},
+        {.addr = ADDR, .flags = 0, .len = 1, .buf = &reg},
         {.addr = ADDR, .flags = I2C_M_RD, .len = 1, .buf = &response }
     };
 
@@ -30,6 +30,15 @@ __u8 mpu6050::read_byte(__u8 payload) {
     ioctl(fd, I2C_RDWR, &data);
 
     return response;
+}
+
+
+__u16 mpu6050::read_word(__u8 regA, __u8 regB){
+
+    __u16 word = read_byte(regA);
+    word = word << 8 | read_byte(regB);
+
+    return word;
 }
 
 __u8 mpu6050::who_am_i(){

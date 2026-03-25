@@ -10,6 +10,7 @@ class mpu6050 {
     public:
        mpu6050(int bus); 
        __u8 read_byte(__u8 payload);
+       __u16 read_word(__u8 regA, __u8 regB);
        __u8 who_am_i();
 };  
 
