@@ -32,6 +32,12 @@ __u8 mpu6050::read_byte(__u8 reg) {
     return response;
 }
 
+int mpu6050::write_byte(__u8 reg, __u8 byte){
+
+    __u8 msg[2] = {reg, byte};
+
+    return write(fd, msg, sizeof(msg));
+}
 
 __u16 mpu6050::read_word(__u8 regA, __u8 regB){
 
@@ -43,4 +49,8 @@ __u16 mpu6050::read_word(__u8 regA, __u8 regB){
 
 __u8 mpu6050::who_am_i(){
     return read_byte(0x75);
+}
+
+void mpu6050::wake_up(){
+    write_byte(0x6B, 0x00);
 }
