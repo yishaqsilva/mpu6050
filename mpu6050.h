@@ -19,7 +19,6 @@ class mpu6050 {
        __u16 gyro_x();
        __u16 gyro_y();
        __u16 gyro_z();
-       __u16* gyro();
 };  
 
 #endif
