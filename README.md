@@ -20,19 +20,19 @@ A lightweight, low-level C++ library for interfacing with the MPU6050 (accelerom
 ## Installation
 Simply clone this repository via:
 
-'''bash
+```bash
 git clone https://github.com/yishaqsilva/mpu6050
-'''
+```
 
 ## Usage
 
 Use i2cdetect to find the bus the mpu6050 module is currently attached to:
 
-bash'''
+```bash
 sudo i2cdetect -y 1
-'''
+```
 
-c++'''
+```cpp
 #include "mpu6050.h"
 
 mpu6050 m(1); // dev/i2c-1
@@ -46,10 +46,10 @@ float g = m.gyro_x();
 float k = m.gyro_y_raw();
 
 //configuration
-m.config_accel_
+m.accel_config_afs_sel(0); //set the LSB of the accel
 
 //bypass abstractions and extend functionality with
 m.write_byte(0x6B, 0x00);
 
 m.read_byte(0x75);
-'''
+```
