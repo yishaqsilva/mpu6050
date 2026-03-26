@@ -54,3 +54,23 @@ __u8 mpu6050::who_am_i(){
 void mpu6050::wake_up(){
     write_byte(0x6B, 0x00);
 }
+
+__u16 mpu6050::gyro_x(){
+    return read_word(0x67, 0x68);   
+}
+__u16 mpu6050::gyro_y(){
+    return read_word(0x69, 0x70);   
+}
+__u16 mpu6050::gyro_z(){
+    return read_word(0x71, 0x72);   
+}
+
+__u16* mpu6050::gyro(){
+    __u16 out[3];
+
+    out[0] = read_word(0x67, 0x68);
+    out[1] = read_word(0x69, 0x70);
+    out[2] = read_word(0x71, 0x72);
+
+    return out;
+}
