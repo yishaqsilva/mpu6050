@@ -43,7 +43,7 @@ float t = m.temp();
 float g = m.gyro_x();
 
 //raw values
-float k = m.gyro_y_raw();
+__u16 k = m.gyro_y_raw();
 
 //configuration
 m.accel_config_afs_sel(0); //set the LSB of the accel
