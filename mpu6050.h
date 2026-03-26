@@ -2,6 +2,13 @@
 #define MPU6050_H
 #include <linux/types.h>
 #define ADDR 0x68
+#define EXT_SYNC_SET 0x38 //config
+#define DLPF_CFG 0x08
+#define AFS_SEL 0x18 //accel config
+#define ZA_ST 0x20
+#define YA_ST 0x40
+#define XA_ST 0x80
+#define FS_SEL 0x18 //gyro config
 
 class mpu6050 {
 
@@ -19,6 +26,15 @@ class mpu6050 {
        __u16 gyro_x();
        __u16 gyro_y();
        __u16 gyro_z();
+       __u16 accel_x();
+       __u16 accel_y();
+       __u16 accel_z();
+       __u16 temp();
+       __u8 ext_sens_data(__u8 n);
+     
+       void config(__u8 value);
+       void accel_config(__u8 value);
+       void gyro_config(__u8 value);
 };  
 
 #endif

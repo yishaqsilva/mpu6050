@@ -65,3 +65,34 @@ __u16 mpu6050::gyro_z(){
     return read_word(0x47, 0x48);   
 }
 
+__u16 mpu6050::accel_x(){
+    return read_word(0x3b, 0x3c);
+}
+__u16 mpu6050::accel_y(){
+    return read_word(0x3d, 0x3e);
+}
+__u16 mpu6050::accel_z(){
+    return read_word(0x3f, 0x40);
+}
+
+__u16 mpu6050::temp(){
+    return read_word(0x41, 0x42);
+}
+
+__u8 mpu6050::ext_sens_data(__u8 n){
+    return read_byte(0x49 + n);
+}
+
+void mpu6050::config(__u8 value){
+    write_byte(0x1A, 0x00);
+    write_byte(0x1A, value);
+}
+
+void mpu6050::accel_config(__u8 value){
+    write_byte(0x1C, 0x00);
+    write_byte(0x1C, value);
+}
+void mpu6050::gyro(__u8 value){
+    write_byte(0x1B, 0x00);
+    write_byte(0x1B, value);
+}
