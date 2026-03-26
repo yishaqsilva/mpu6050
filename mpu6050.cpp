@@ -13,6 +13,7 @@ mpu6050::mpu6050(int n) {
     snprintf(bus, sizeof(bus), "/dev/i2c-%d", n);
     fd = open(bus, O_RDWR);
     ioctl(fd, I2C_SLAVE, ADDR);
+    wake_up();
 }
 
 __u8 mpu6050::read_byte(__u8 reg) {
@@ -69,9 +70,11 @@ __u16 mpu6050::gyro_z_raw(){
 float mpu6050::gyro_x(){
     return read_word(0x43, 0x44) / gyro_lsb;
 }
+
 float mpu6050::gyro_y(){
     return read_word(0x45, 0x46) / gyro_lsb;
 }
+
 float mpu6050::gyro_z(){
     return read_word(0x47, 0x48) / gyro_lsb;
 }
@@ -89,12 +92,14 @@ __u16 mpu6050::accel_z_raw(){
 float mpu6050::accel_x(){
     return read_word(0x3b, 0x3c) / accl_lsb;
 }
+
 float mpu6050::accel_y(){
     return read_word(0x3d, 0x3e) / accl_lsb;
 }
 
 float mpu6050::accel_z(){
     return read_word(0x3f, 0x40) / accl_lsb;
+}
 
 float mpu6050::temp(){
     return (read_word(0x41, 0x42) / 340.0f) + 36.53f;
