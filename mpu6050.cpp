@@ -92,7 +92,7 @@ void mpu6050::accel_config(__u8 value){
     write_byte(0x1C, 0x00);
     write_byte(0x1C, value);
 }
-void mpu6050::gyro(__u8 value){
+void mpu6050::gyro_config(__u8 value){
     write_byte(0x1B, 0x00);
     write_byte(0x1B, value);
 }
