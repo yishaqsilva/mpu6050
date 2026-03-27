@@ -7,7 +7,7 @@
 #include <cstdint>
 #include <stdio.h>
 
-void mpu6050::wake_up(){
+inline void mpu6050::wake_up(){
     write_byte(0x6B, 0x00);
 }
 
