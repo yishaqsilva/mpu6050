@@ -20,7 +20,7 @@ class mpu6050 {
        __u16 read_word(__u8 regA, __u8 regB);
 
        __u8 who_am_i();
-       inline void wake_up();
+       void wake_up();
 
        __u16 gyro_x_raw();
        __u16 gyro_y_raw();

@@ -7,7 +7,7 @@
 #include <cstdint>
 #include <stdio.h>
 
-inline void mpu6050::wake_up(){
+void mpu6050::wake_up(){
     write_byte(0x6B, 0x00);
 }
 
@@ -17,6 +17,7 @@ mpu6050::mpu6050(int n) {
     snprintf(bus, sizeof(bus), "/dev/i2c-%d", n);
     fd = open(bus, O_RDWR);
     ioctl(fd, I2C_SLAVE, ADDR);
+    write_byte(0x6B, 0x00); //wakeup
 }
 
 __u8 mpu6050::read_byte(__u8 reg) {
