@@ -7,13 +7,16 @@
 #include <cstdint>
 #include <stdio.h>
 
+void mpu6050::wake_up(){
+    write_byte(0x6B, 0x00);
+}
+
 mpu6050::mpu6050(int n) {
 
     char bus[11];
     snprintf(bus, sizeof(bus), "/dev/i2c-%d", n);
     fd = open(bus, O_RDWR);
     ioctl(fd, I2C_SLAVE, ADDR);
-    wake_up();
 }
 
 __u8 mpu6050::read_byte(__u8 reg) {
@@ -53,9 +56,6 @@ __u8 mpu6050::who_am_i(){
     return read_byte(0x75);
 }
 
-void mpu6050::wake_up(){
-    write_byte(0x6B, 0x00);
-}
 
 __u16 mpu6050::gyro_x_raw(){
     return read_word(0x43, 0x44);   
