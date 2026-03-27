@@ -114,7 +114,7 @@ void mpu6050::accel_config_afs_sel(int n) {
     __u8 conf = read_byte(0x1C);
 
     //preserve XA_ST, YA_ST, ZA_ST bits
-    conf = prev & 0xE0;
+    conf = conf & 0xE0;
 
     switch(n) {
         case 0: 
